@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number List Manager</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Number List</h2>
+
+    <input id="numberInput" type="number" placeholder="Enter a number">
+
+    <button id="addBeginningButton">Add to Beginning</button>
+    <button id="addEndButton">Add to End</button>
+
+    <p id="numberList">List: empty</p>
+    <p id="itemCount">Number of items: 0</p>
+
+    <button id="removeFirstButton">Remove First</button>
+    <button id="removeLastButton">Remove Last</button>
+    <button id="clearButton">Clear List</button>
+  </div>
+
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    color: #333;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 8px 12px;
+    margin: 4px 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f5f5f5;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #e5e5e5;
+  }
+
+  #numberList {
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  #itemCount {
+    color: #666;
+  }
+</style>
+
+<script>
+  let numbers = [10, 15, 20, 35, 40, 25];
+  const numberInput = document.getElementById("numberInput");
+
+  function displayNumbers() {
+    if (numbers.length === 0) {
+      document.getElementById("numberList").innerHTML = "List: empty";
+    } else {
+      document.getElementById("numberList").innerHTML =
+        "List: " + numbers.join(", ");
+    }
+    document.getElementById("itemCount").innerHTML =
+      "Number of items: " + numbers.length;
+  }
+
+  function getInputNumber() {
+    const inputValue = numberInput.value;
+    if (inputValue === "") return null;
+    return Number(inputValue);
+  }
+
+  document.getElementById("addEndButton").addEventListener("click", function () {
+    const value = getInputNumber();
+    if (value === null) return;
+    numbers.push(value);
+    displayNumbers();
+  });
+
+  document.getElementById("addBeginningButton").addEventListener("click", function () {
+    const value = getInputNumber();
+    if (value === null) return;
+    numbers.unshift(value);
+    displayNumbers();
+  });
+
+  document.getElementById("removeFirstButton").addEventListener("click", function () {
+    if (numbers.length > 0) {
+      numbers.shift();
+      displayNumbers();
+    }
+  });
+
+  document.getElementById("removeLastButton").addEventListener("click", function () {
+    if (numbers.length > 0) {
+      numbers.pop();
+      displayNumbers();
+    }
+  });
+
+  document.getElementById("clearButton").addEventListener("click", function () {
+    numbers = [];
+    displayNumbers();
+  });
+
+  numberInput.addEventListener("input", function (event) {
+    if (event.target.value === "") {
+      numberInput.title = "Enter a number before adding it.";
+    } else {
+      numberInput.title = "Ready to add: " + event.target.value;
+    }
+  });
+
+  displayNumbers();
+</script>
+

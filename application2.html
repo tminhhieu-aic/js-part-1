@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile Generator</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Student Profile Generator</h2>
+
+        <label>Student Name:</label>
+        <input type="text" id="studentName">
+
+        <p id="namePreview">Name preview: </p>
+
+        <label>Study Program:</label>
+        <select id="program">
+            <option value="Information Technology">
+                Information Technology
+            </option>
+            <option value="Data Science">
+                Data Science
+            </option>
+            <option value="Business Administration">
+                Business Administration
+            </option>
+        </select>
+
+        <button id="generateButton">
+            Generate Profile
+        </button>
+
+        <div class="profile" id="profileCard">
+            <h3>Student Profile</h3>
+
+            <p id="displayName">Name: Not available</p>
+            <p id="displayProgram">Program: Not available</p>
+        </div>
+
+        <p class="status" id="statusMessage">
+            Status: Waiting for user interaction.
+        </p>
+
+    </div>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 30px;
+    }
+
+    .container {
+        width: 450px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .profile {
+        margin-top: 20px;
+        padding: 15px;
+        border: 2px solid #cccccc;
+        border-radius: 8px;
+        background-color: #ffffff;
+    }
+
+    .status {
+        margin-top: 15px;
+        color: #555555;
+        font-size: 14px;
+    }
+
+    #namePreview {
+        color: red;
+        text-decoration: underline;
+    }
+</style>
+
+
+<script>
+
+    // Get HTML elements
+
+    const studentName =
+        document.getElementById("studentName");
+
+    const program =
+        document.getElementById("program");
+
+    const generateButton =
+        document.getElementById("generateButton");
+
+    const profileCard =
+        document.getElementById("profileCard");
+
+    const statusMessage =
+        document.getElementById("statusMessage");
+
+
+    // Event 1: Live name preview
+
+    studentName.addEventListener("input", function() {
+
+        document.getElementById("namePreview").innerHTML =
+            "Name preview: " + studentName.value;
+
+    });
+
+
+    // Event 2: Program selection
+
+    program.addEventListener("change", function() {
+
+        statusMessage.innerHTML =
+            "Status: Study program changed.";
+
+    });
+
+
+    // Event 3: Generate profile
+
+    generateButton.addEventListener("click", function() {
+
+        document.getElementById("displayName").innerHTML =
+            "Name: " + studentName.value;
+
+        document.getElementById("displayProgram").innerHTML =
+            "Program: " + program.value;
+
+        statusMessage.innerHTML =
+            "Status: Profile generated successfully.";
+
+    });
+
+
+    // Event 4: Mouse over button
+
+    generateButton.addEventListener("mouseover", function() {
+
+        generateButton.innerHTML = "PRESS TO SUBMIT";
+
+    });
+
+
+    // Event 5: Mouse leaves button
+
+    generateButton.addEventListener("mouseout", function() {
+
+        generateButton.innerHTML = "Generate Profile";
+
+    });
+
+</script>
